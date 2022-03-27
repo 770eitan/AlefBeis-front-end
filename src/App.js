@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react'
+import { Route, Routes, NavLink } from 'react-router-dom'
+import './App.css'
+import AddLetter from './pages/AddLetter/AddLetter'
 function App() {
+  const [letters, setLetters] = useState([])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Alef-Beis Letters!
+        <nav>
+          <NavLink to='/'>Letters List</NavLink>
+          <NavLink className='m-left' to='/add'>Add Letter</NavLink>
+        </nav>
       </header>
+      <main>
+        <Routes>
+          <Route path='/add' element={<AddLetter/>} />
+        </Routes>
+      </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
