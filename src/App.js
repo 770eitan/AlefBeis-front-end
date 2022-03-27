@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes, NavLink } from "react-router-dom";
 import "./App.css";
 import * as letterService from "./services/letters";
 import AddLetter from "./pages/AddLetter/AddLetter";
+
+
 function App() {
   const [letters, setLetters] = useState([]);
-  const handleAddLetter = async newLetterData => {
-    const newLetter= await letterService.create(newLetterData)
+  useEffect (() => {letterService.getAll().then(allLetters=> setLetters (allLetters))
+
+  })
+  const handleAddLetter = async (newLetterData) => {
+    const newLetter = await letterService.create(newLetterData);
     setLetters([...letters, newLetter]);
   };
   return (
