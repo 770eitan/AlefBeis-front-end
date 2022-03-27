@@ -9,17 +9,24 @@ function AddLetter(props) {
     value: "",
   });
 
-  useEffect(()=>{
-formElement.current.checkValidity() ? setValidForm(true) : setValidForm(false)
-  },[formData])
+  useEffect(() => {
+    formElement.current.checkValidity()
+      ? setValidForm(true)
+      : setValidForm(false);
+  }, [formData]);
   const handleChange = (evt) => {
-	  console.log(formElement)
+    console.log(formElement);
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
+
+  const handleSubmit = evt => {
+	evt.preventDefault()
+	props.handleAddLetter(formData)
+}
   return (
     <>
       <h1>Add Letter</h1>
-      <form autoComplete="off" ref={formElement}>
+       <form autoComplete="off" ref={formElement} onSubmit={handleSubmit}>
         <div className="form-group mb-3">
           <label htmlFor="name-input" className="form-label">
             Letter's Name (required)
