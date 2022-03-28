@@ -11,5 +11,8 @@ function create(letter) {
 function getAll() {
   return fetch(BASE_URL).then((res) => res.json());
 }
-
-export { create, getAll };
+function deleteOne(id) {
+    return fetch(`${BASE_URL}/${id}`, {method: 'DELETE'})
+    .then(res => res.json())
+  }
+export { create, getAll,deleteOne };
