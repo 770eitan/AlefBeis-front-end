@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function LetterCard({letter,handleDeleteLetter}) {
   return(
     <div className="card">
@@ -7,6 +9,13 @@ function LetterCard({letter,handleDeleteLetter}) {
         <p className="card-text"> Gematria:{letter.value} </p>
       </div>
       <div className="card-footer">
+      <Link
+          className='btn btn-sm btn-warning'
+          to='/edit'
+          state={{letter}}
+        >
+          Edit
+        </Link>
         <button className="btn btn-sm btn-danger m-left"
         onClick={()=>handleDeleteLetter(letter._id)}>
           Delete

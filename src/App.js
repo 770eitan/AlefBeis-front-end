@@ -4,6 +4,7 @@ import "./App.css";
 import * as letterService from "./services/letters";
 import LetterList from "./pages/LetterList/LetterList";
 import AddLetter from "./pages/AddLetter/AddLetter";
+import EditLetter from "./pages/EditLetter/EditLetter";
 
 function App() {
   const [letters, setLetters] = useState([]);
@@ -19,6 +20,16 @@ function App() {
   const handleDeleteLetter = id => {
     letterService.deleteOne(id)
     .then(deletedLetter => setLetters(letters.filter(letter => letter._id !== id)))
+  }
+  const handleUpdateLetter = updatedLetterData => {
+    letterService.update(updatedLetterData)
+    .then(updatedLetter => {
+      const newLettersArray = letters.map(letter => 
+        letter._id === updatedLetter._id ? updatedLetter : letter
+      )
+      setLetters(newLettersArray)
+			navigate('/')
+    })
   }
   return (
     <div className="App">
@@ -40,6 +51,7 @@ function App() {
           <Route path="/" element={<LetterList letters={letters} handleDeleteLetter= {handleDeleteLetter}/> 
                              
           }/>
+          				<Route path='/edit' element={<EditLetter handleUpdateLetter={handleUpdateLetter} />} />
         </Routes>
       </main>
     </div>
